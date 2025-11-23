@@ -150,6 +150,88 @@ examples of adding popularly requested plugins.
     * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
     * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
 
+### Plugin Management
+
+This configuration provides a flexible plugin management system with two levels of control:
+
+#### Central Plugin Settings
+
+The main plugin configuration is in `lua/config/settings.lua`. This file contains an opt-in
+system where plugins must be explicitly enabled to load:
+
+```lua
+-- lua/config/settings.lua
+M.plugins = {
+  coding = {
+    autopairs = true,      -- Enable autopairs
+    copilot = true,        -- Enable GitHub Copilot
+    -- Plugins not listed here are disabled by default
+  },
+  editor = {
+    telescope = true,
+    oil = true,
+    -- ...
+  },
+  -- Other categories: formatting, git, lsp, treesitter, ui, utils
+}
+```
+
+To disable a plugin, simply set it to `false` or remove it from the settings table.
+
+#### Machine-Specific Overrides
+
+For machine-specific customizations (e.g., different setups on work/home computers),
+you can create a `lua/plugins/user.lua` file. This file is git-ignored and takes
+priority over the central settings.
+
+**To get started:**
+
+1. Copy the example file:
+   ```sh
+   cp lua/plugins/user.example.lua lua/plugins/user.lua
+   ```
+
+2. Edit `lua/plugins/user.lua` to customize plugins:
+   ```lua
+   return {
+     -- Disable a plugin enabled in settings.lua
+     { 'github/copilot.vim', enabled = false },
+     
+     -- Enable a plugin disabled in settings.lua
+     { 'ThePrimeagen/harpoon', enabled = true },
+     
+     -- Override plugin options
+     {
+       'folke/tokyonight.nvim',
+       opts = { style = 'storm' },
+     },
+     
+     -- Add entirely new plugins
+     {
+       'tpope/vim-fugitive',
+       cmd = { 'Git', 'G' },
+     },
+   }
+   ```
+
+**Plugin Categories:**
+
+The plugins are organized into these categories (matching the folder structure):
+- `coding` - Completion, snippets, AI tools, autopairs
+- `editor` - Navigation, fuzzy finding, file management  
+- `formatting` - Code formatting tools
+- `git` - Git integration
+- `lsp` - Language servers and LSP configuration
+- `treesitter` - Syntax highlighting and parsing
+- `ui` - Colorschemes, UI enhancements
+- `utils` - Utility plugins
+
+**Priority Order:**
+
+Settings are applied in this order (later overrides earlier):
+1. Central settings (`lua/config/settings.lua`)
+2. User overrides (`lua/plugins/user.lua`) - highest priority
+
 ### Install Recipes
 
 Below you can find OS specific install instructions for Neovim and dependencies.

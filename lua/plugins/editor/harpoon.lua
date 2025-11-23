@@ -1,6 +1,9 @@
 -- Harpoon for quick file navigation
+local settings = require 'config.settings'
+
 return {
   'ThePrimeagen/harpoon',
+  enabled = settings.is_enabled('editor', 'harpoon'),
   branch = 'harpoon2',
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()

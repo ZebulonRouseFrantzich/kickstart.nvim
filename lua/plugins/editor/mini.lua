@@ -1,6 +1,9 @@
 -- Collection of various small independent plugins/modules
+local settings = require 'config.settings'
+
 return {
   'echasnovski/mini.nvim',
+  enabled = settings.is_enabled('editor', 'mini'),
   event = 'VeryLazy',
   config = function()
     -- Better Around/Inside textobjects

@@ -1,6 +1,9 @@
 -- Highlight, edit, and navigate code
+local settings = require 'config.settings'
+
 return {
   'nvim-treesitter/nvim-treesitter',
+  enabled = settings.is_enabled('treesitter', 'treesitter'),
   build = ':TSUpdate',
   main = 'nvim-treesitter.configs',
   opts = {

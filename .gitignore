@@ -4,3 +4,7 @@ test.sh
 nvim
 
 spell/
+
+# User-specific plugin overrides (machine-specific customizations)
+lua/plugins/user.lua
+lua/plugins/user/

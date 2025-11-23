@@ -1,6 +1,9 @@
 -- Main LSP Configuration
+local settings = require 'config.settings'
+
 return {
   'neovim/nvim-lspconfig',
+  enabled = settings.is_enabled('lsp', 'lspconfig'),
   dependencies = {
     'mason-org/mason.nvim',
     'mason-org/mason-lspconfig.nvim',

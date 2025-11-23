@@ -1,0 +1,74 @@
+-- Plugin enable/disable settings
+-- Plugins are disabled by default unless explicitly enabled here
+-- Organized by plugin folder for easy navigation
+
+local M = {}
+
+-- Plugin toggles organized by category (folder structure)
+M.plugins = {
+  -- lua/plugins/coding/
+  coding = {
+    autopairs = true,
+    ['blink-cmp'] = true,
+    copilot = true,
+    luasnip = true,
+    ['nvim-ts-autotag'] = true,
+  },
+
+  -- lua/plugins/editor/
+  editor = {
+    harpoon = true,
+    mini = true,
+    oil = true,
+    telescope = true,
+    ['which-key'] = true,
+  },
+
+  -- lua/plugins/formatting/
+  formatting = {
+    conform = true,
+  },
+
+  -- lua/plugins/git/
+  git = {
+    gitsigns = true,
+    lazygit = true,
+  },
+
+  -- lua/plugins/lsp/
+  lsp = {
+    lspconfig = true,
+    mason = true,
+    ['typescript-tools'] = true,
+  },
+
+  -- lua/plugins/treesitter/
+  treesitter = {
+    treesitter = true,
+  },
+
+  -- lua/plugins/ui/
+  ui = {
+    colorscheme = true,
+    ['indent-line'] = true,
+    ['render-markdown'] = true,
+    ['todo-comments'] = true,
+  },
+
+  -- lua/plugins/utils/
+  utils = {
+    ['guess-indent'] = true,
+    lazydev = true,
+  },
+}
+
+-- Helper function to check if a plugin is enabled
+-- Returns false if the plugin is not found in the settings table
+function M.is_enabled(category, plugin_name)
+  if M.plugins[category] and M.plugins[category][plugin_name] ~= nil then
+    return M.plugins[category][plugin_name]
+  end
+  return false -- Default to disabled if not in settings
+end
+
+return M

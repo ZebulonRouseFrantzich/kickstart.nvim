@@ -1,6 +1,9 @@
 -- LazyGit integration
+local settings = require 'config.settings'
+
 return {
   'kdheepak/lazygit.nvim',
+  enabled = settings.is_enabled('git', 'lazygit'),
   lazy = true,
   cmd = {
     'LazyGit',

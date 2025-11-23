@@ -2,9 +2,12 @@
 -- NOTE: gitsigns is already included in init.lua but contains only the base
 -- config. This will add also the recommended keymaps.
 
+local settings = require 'config.settings'
+
 return {
   {
     'lewis6991/gitsigns.nvim',
+    enabled = settings.is_enabled('git', 'gitsigns'),
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
       on_attach = function(bufnr)

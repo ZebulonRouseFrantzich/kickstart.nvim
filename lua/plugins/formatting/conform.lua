@@ -1,6 +1,9 @@
 -- Autoformat
+local settings = require 'config.settings'
+
 return {
   'stevearc/conform.nvim',
+  enabled = settings.is_enabled('formatting', 'conform'),
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
   keys = {

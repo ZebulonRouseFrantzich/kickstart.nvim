@@ -14,18 +14,27 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
+-- Build the spec table dynamically
+local spec = {
+  -- Import all plugin modules from lua/plugins/
+  { import = 'plugins.editor' },
+  { import = 'plugins.coding' },
+  { import = 'plugins.lsp' },
+  { import = 'plugins.formatting' },
+  { import = 'plugins.treesitter' },
+  { import = 'plugins.git' },
+  { import = 'plugins.ui' },
+  { import = 'plugins.utils' },
+}
+
+-- Conditionally add user overrides if the file exists
+local user_config = vim.fn.stdpath 'config' .. '/lua/plugins/user.lua'
+if vim.fn.filereadable(user_config) == 1 then
+  table.insert(spec, { import = 'plugins.user' })
+end
+
 require('lazy').setup({
-  spec = {
-    -- Import all plugin modules from lua/plugins/
-    { import = 'plugins.editor' },
-    { import = 'plugins.coding' },
-    { import = 'plugins.lsp' },
-    { import = 'plugins.formatting' },
-    { import = 'plugins.treesitter' },
-    { import = 'plugins.git' },
-    { import = 'plugins.ui' },
-    { import = 'plugins.utils' },
-  },
+  spec = spec,
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table

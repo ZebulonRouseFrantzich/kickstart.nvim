@@ -1,6 +1,9 @@
 -- Fuzzy Finder (files, lsp, etc)
+local settings = require 'config.settings'
+
 return {
   'nvim-telescope/telescope.nvim',
+  enabled = settings.is_enabled('editor', 'telescope'),
   event = 'VimEnter',
   dependencies = {
     'nvim-lua/plenary.nvim',

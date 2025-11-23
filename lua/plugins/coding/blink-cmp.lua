@@ -1,6 +1,9 @@
 -- Autocompletion
+local settings = require 'config.settings'
+
 return {
   'saghen/blink.cmp',
+  enabled = settings.is_enabled('coding', 'blink-cmp'),
   event = 'VimEnter',
   version = '1.*',
   dependencies = {

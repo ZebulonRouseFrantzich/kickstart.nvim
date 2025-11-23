@@ -1,6 +1,9 @@
 -- Useful plugin to show you pending keybinds.
+local settings = require 'config.settings'
+
 return {
   'folke/which-key.nvim',
+  enabled = settings.is_enabled('editor', 'which-key'),
   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
   opts = {
     -- delay between pressing a key and opening which-key (milliseconds)
