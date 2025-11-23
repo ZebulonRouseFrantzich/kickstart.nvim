@@ -2,8 +2,9 @@
 local settings = require 'config.settings'
 
 return {
-  'echasnovski/mini.nvim',
+  'nvim-mini/mini.nvim',
   enabled = settings.is_enabled('editor', 'mini'),
+  version = false,
   event = 'VeryLazy',
   config = function()
     -- Better Around/Inside textobjects
