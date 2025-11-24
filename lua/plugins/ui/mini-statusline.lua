@@ -1,19 +1,12 @@
--- Collection of various small independent plugins/modules
+-- Simple and easy statusline
 local settings = require 'config.settings'
 
 return {
-  'nvim-mini/mini.nvim',
-  enabled = settings.is_enabled('editor', 'mini'),
+  'nvim-mini/mini.statusline',
+  enabled = settings.is_enabled('ui', 'mini-statusline'),
   version = false,
   event = 'VeryLazy',
   config = function()
-    -- Better Around/Inside textobjects
-    require('mini.ai').setup { n_lines = 500 }
-
-    -- Add/delete/replace surroundings (brackets, quotes, etc.)
-    require('mini.surround').setup()
-
-    -- Simple and easy statusline.
     local statusline = require 'mini.statusline'
     statusline.setup { use_icons = vim.g.have_nerd_font }
 

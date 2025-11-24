@@ -1,5 +1,6 @@
 -- Fuzzy Finder (files, lsp, etc)
 local settings = require 'config.settings'
+local lsp_picker = require 'config.lsp_picker_keymaps'
 
 return {
   'nvim-telescope/telescope.nvim',
@@ -60,5 +61,16 @@ return {
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
+
+    -- Register LSP picker keymaps for lspconfig.lua
+    -- This allows lspconfig to use Telescope for LSP operations when Telescope is enabled
+    lsp_picker.register(function(map)
+      map('grr', builtin.lsp_references, '[G]oto [R]eferences')
+      map('gri', builtin.lsp_implementations, '[G]oto [I]mplementation')
+      map('grd', builtin.lsp_definitions, '[G]oto [D]efinition')
+      map('gO', builtin.lsp_document_symbols, 'Open Document Symbols')
+      map('gW', builtin.lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+      map('grt', builtin.lsp_type_definitions, '[G]oto [T]ype Definition')
+    end)
   end,
 }

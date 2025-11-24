@@ -12,15 +12,20 @@ M.plugins = {
     ['blink-cmp'] = true,
     copilot = true,
     luasnip = true,
+    ['mini-comment'] = false,
     ['nvim-ts-autotag'] = true,
   },
 
   -- lua/plugins/editor/
   editor = {
+    telescope = false,
+    ['mini-pick'] = true,
+    ['mini-ai'] = true,
+    ['mini-files'] = false,
+    ['mini-jump2d'] = true,
+    ['mini-surround'] = true,
     harpoon = true,
-    mini = true,
     oil = true,
-    telescope = true,
     ['which-key'] = true,
   },
 
@@ -51,6 +56,10 @@ M.plugins = {
   ui = {
     colorscheme = true,
     ['indent-line'] = true,
+    ['mini-animate'] = true,
+    ['mini-icons'] = true,
+    ['mini-indentscope'] = false,
+    ['mini-statusline'] = true,
     ['render-markdown'] = true,
     ['todo-comments'] = true,
   },
