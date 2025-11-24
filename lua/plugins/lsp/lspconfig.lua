@@ -1,5 +1,6 @@
 -- Main LSP Configuration
 local settings = require 'config.settings'
+local lsp_picker = require 'config.lsp_picker_keymaps'
 
 return {
   'neovim/nvim-lspconfig',
@@ -22,13 +23,18 @@ return {
 
         map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-        map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-        map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-        map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
-        map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
-        map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+
+        -- Use picker-specific LSP keymaps if available, otherwise fallback to vanilla LSP
+        if not lsp_picker.setup(map) then
+          -- Fallback to vanilla LSP when no picker is available
+          map('grr', vim.lsp.buf.references, '[G]oto [R]eferences')
+          map('gri', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+          map('grd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+          map('gO', vim.lsp.buf.document_symbol, 'Open Document Symbols')
+          map('gW', vim.lsp.buf.workspace_symbol, 'Open Workspace Symbols')
+          map('grt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
+        end
 
         local function client_supports_method(client, method, bufnr)
           if vim.fn.has 'nvim-0.11' == 1 then
